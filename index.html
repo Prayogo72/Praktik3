@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas Praktik 3 Vue</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+<div id="app">
+  <h1>Sistem Bahan Ajar UT</h1>
+  <nav>
+    <button @click="tab='stok'">
+      Stok Bahan Ajar
+    </button>
+    <button @click="tab='tracking'">
+      Tracking DO
+    </button>
+    <button @click="tab='order'">
+      Pemesanan
+    </button>
+  </nav>
+
+  <!-- STOK -->
+  <section v-show="tab==='stok'">
+    <ba-stock-table
+      :items="state.stok"
+      :upbjj="state.upbjjList"
+      :kategori="state.kategoriList"
+    >
+    </ba-stock-table>
+
+  </section>
+
+  <!-- TRACKING -->
+  <section v-show="tab==='tracking'">
+    <do-tracking
+      :tracking="state.tracking"
+    >
+    </do-tracking>
+
+  </section>
+
+  <!-- ORDER -->
+  <section v-show="tab==='order'">
+    <order-form
+      :paket="state.paket"
+      :ekspedisi="state.pengirimanList"
+      :tracking="state.tracking"
+    >
+    </order-form>
+  </section>
+  <app-modal ref="modal"></app-modal>
+</div>
+
+<!-- VUE -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<!-- SERVICE -->
+<script src="js/services/api.js"></script>
+
+<!-- COMPONENT -->
+<script src="js/components/stock-table.js"></script>
+<script src="js/components/do-tracking.js"></script>
+<script src="js/components/order-form.js"></script>
+<script src="js/components/status-badge.js"></script>
+<script src="js/components/app-modal.js"></script>
+
+<!-- ROOT -->
+<script src="js/app.js"></script>
+
+<footer>
+  Dodong Prayogo - 053793569
+</footer>
+
+</body>
+</html>
