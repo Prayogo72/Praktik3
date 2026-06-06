@@ -3,7 +3,7 @@ Vue.component('do-tracking',{
   data(){
     return {
       keyword: '',
-      hasil: null, // Menampung objek { nomorDO: '...', detail: { ... } }
+      hasil: null,
       dicari: false,
       newDO: {
         nim: '',
@@ -35,17 +35,14 @@ Vue.component('do-tracking',{
     cari(){
       this.hasil = null
       this.dicari = false
-      
-      // Mengubah kata kunci ke huruf besar semua agar tidak sensitif huruf kecil/besar
       const kataKunci = this.keyword.trim().toUpperCase()
 
       if (!kataKunci) return
 
       this.tracking.forEach(item => {
-        const key = Object.keys(item)[0] // Mengambil nomor DO (ex: DO2026-004)
+        const key = Object.keys(item)[0]
         const data = item[key]
         
-        // Cek pencarian berdasarkan Nomor DO ATAU berdasarkan NIM (dikonversi ke string agar aman)
         if(
           key.toUpperCase() === kataKunci || 
           String(data.nim) === kataKunci
